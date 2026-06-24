@@ -26,10 +26,8 @@ template <typename type> deque<type>::deque(){
     lastElement = nullptr;
 }
 template <typename type> deque<type>::~deque(){
-    for (int i = 0; i < size; i++){ // delete size elements, because deque include size elements, when we delete size elements, deque becomes empty
-        element<type> *cur = firstElement;
-        firstElement = (*cur).back;
-        delete cur;
+    while (!empty()){
+        popBack();
     }
 }
 template <typename type> void deque<type>::pushFront(type x){
@@ -99,10 +97,18 @@ template <typename type> void deque<type>::popBack(){
     }
 }
 template <typename type> type deque<type>::front(){
-    return (*firstElement).value;
+    if (size > 0){
+        return (*firstElement).value;
+    }else{
+        return 0;
+    }
 }
 template <typename type> type deque<type>::back(){
-    return (*lastElement).value;
+    if (size > 0){
+        return (*lastElement).value;
+    }else{
+        return 0;
+    }
 }
 template <typename type> long long int deque<type>::getSize(){
     return size;
